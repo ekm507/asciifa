@@ -128,6 +128,32 @@ vector<string> string_into_vector(string text)
     return chars;
 }
 
+int get_variation(string before, string character, string after)
+{
+
+    // characters which need character to be separated if it is after them
+    string after_n = "()«»رذزدژآاءٔوؤ!؟?\n. ‌،:؛";
+    //  characters which need character to be separated if it is before them
+    string before_n = "()«» ‌،؛:ٔ.؟!?\n";
+    // list of characters in persian alphabet
+    string fa = "ضصثقفغعهخحجچشسیبلاتنمکگظطزآرذدپوؤءژ‍";
+
+    int variation = 0;
+
+    if (fa.find(character) != string::npos)
+        if (before_n.find(after) == string::npos and after_n.find(character) == string::npos)
+            if (after_n.find(before) == string::npos)
+                variation = 2;
+            else
+                variation = 1;
+        else if (after_n.find(before) == string::npos)
+            variation = 3;
+        else
+            variation = 4;
+
+    return variation;
+}
+
 int main(int argc, char** argv)
 {
 
@@ -173,13 +199,6 @@ int main(int argc, char** argv)
     int pointer = screen_width;
     
     // define persian joining and non-joining symbols
-
-    // characters which need character to be separated if it is after them
-    string after_n = "()«»رذزدژآاءٔوؤ!؟?\n. ‌،:؛";
-    //  characters which need character to be separated if it is before them
-    string before_n = "()«» ‌،؛:ٔ.؟!?\n";
-    // list of characters in persian alphabet
-    string fa = "ضصثقفغعهخحجچشسیبلاتنمکگظطزآرذدپوؤءژ‍";
 
 
     // start rendering
