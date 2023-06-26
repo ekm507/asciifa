@@ -40,9 +40,17 @@ int main(int argc, char** argv)
     getline (fontfile, header_part, ' ');
     header.glyph_max_width = stoi(header_part);
 
+    getline (fontfile, header_part, ' ');
+    header.number_of_glyphs = stoi(header_part);
+
 
     cout << header.filetype << endl;
     cout << header.glyph_height << endl;
+    cout << header.korsi << endl;
+    cout << header.number_of_comment_lines << endl;
+    cout << header.glyph_max_width << endl;
+    cout << header.number_of_glyphs << endl;
+    cout << header.default_direction << endl;
 
     // while (getline (fontfile, fontfile_line)) {
     // // Output the text from the file
