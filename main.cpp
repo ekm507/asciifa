@@ -2,6 +2,7 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include <utility>
 
 using namespace std;
 
@@ -24,10 +25,9 @@ struct glyph
     vector<string> lines;
 };
 
-int main(int argc, char** argv)
+pair< font_header, vector<glyph> > read_font(ifstream& fontfile)
 {
-    string font_filename = "./fonts/aipara.aff";
-    ifstream fontfile(font_filename);
+
     string fontfile_line;
     string font_header_line;
     font_header header;
@@ -63,21 +63,14 @@ int main(int argc, char** argv)
     {
 
         glyph current_glyph;
-        // cout << endl;
 
         getline (fontfile, fontfile_line);
-        // fontfile >> fontfile_line;
         current_glyph.character = fontfile_line;
-        // cout << "«" << fontfile_line << "»" << endl;
 
         getline (fontfile, fontfile_line, ' ');
-        // cout << "«" << fontfile_line << "»" << endl;
-        // cout << fontfile_line << endl;
         current_glyph.variation = stoi(fontfile_line);
-        // cout  << current_glyph.variation << endl;
 
         getline (fontfile, fontfile_line, ' ');
-        // cout << fontfile_line << endl;
         current_glyph.direction = stoi(fontfile_line);
 
         
@@ -89,31 +82,22 @@ int main(int argc, char** argv)
         
         glyphs.push_back(current_glyph);
 
-        // cout << "«" << glyphs[i].character << "»" << endl;
-        // cout << current_glyph.character << current_glyph.variation << current_glyph.direction << endl;
-        // for (int j = 0; j < header.glyph_height; j++)
-        // {
-        //     // cout << glyphs[i].lines[j] << endl;
-        //     // j+=1;
-        // }
 
     }
 
-    // getline (fontfile, fontfile_line);
-    // cout << fontfile_line << endl;
+    return make_pair(header, glyphs);
+}
 
+int main(int argc, char** argv)
+{
+    string font_filename = "./fonts/aipara.aff";
+    ifstream fontfile(font_filename);
 
-    // cout << header.filetype << endl;
-    // cout << header.glyph_height << endl;
-    // cout << header.korsi << endl;
-    // cout << header.glyph_max_width << endl;
-    // cout << header.number_of_glyphs << endl;
-    // cout << header.default_direction << endl;
+    // font_header header;
+    // vector<glyph> glyphs;
 
-    // while (getline (fontfile, fontfile_line)) {
-    // // Output the text from the file
-    // cout << fontfile_line << endl;
-    // }
+    auto [header, glyphs] = read_font(fontfile);
+
 
     return 0;
 }
