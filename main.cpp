@@ -166,10 +166,15 @@ int main(int argc, char** argv)
     
 
     string text = "سلام";
+    text = " " + text + " ";
     vector<string> chars = string_into_vector(text);
+
     for(auto &i:chars)
     {
         cout << i << endl;
     }
+
+    
+
     return 0;
 }
