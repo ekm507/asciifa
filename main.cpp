@@ -192,14 +192,8 @@ void print_board(vector<vector<string> > board)
     }
 }
 
-int main(int argc, char** argv)
+vector<vector<string> > render(string text, vector<glyph> glyphs, font_header header, int screen_width)
 {
-
-    // read font
-    string font_filename = "./fonts/aipara.aff";
-    ifstream fontfile(font_filename);
-
-    auto [header, glyphs] = read_font(fontfile);
 
     map<pair<string, int>, int> glyph_map;
 
@@ -211,7 +205,6 @@ int main(int argc, char** argv)
 
     // get string and convert it into vector
 
-    string text = "سلام";
     text = " " + text + " ";
     vector<string> chars = string_into_vector(text);
 
@@ -219,7 +212,6 @@ int main(int argc, char** argv)
     // make screen banner
 
     int screen_height = header.glyph_height;
-    int screen_width = 80;
 
     vector<vector<string> > board;
     string whitespace = " ";
@@ -257,6 +249,26 @@ int main(int argc, char** argv)
         index -= current_glyph.width;
     }
 
+    return board;
+
+}
+
+int main(int argc, char** argv)
+{
+
+    // read font
+    string font_filename = "./fonts/aipara.aff";
+    ifstream fontfile(font_filename);
+
+
+    // get string and convert it into vector
+
+    string text = "سلام";
+    int screen_width = 80;
+
+    auto [header, glyphs] = read_font(fontfile);
+
+    auto board = render(text, glyphs, header, screen_width);
     print_board(board);
 
     return 0;
