@@ -154,7 +154,7 @@ int get_variation(string before, string character, string after)
     return variation;
 }
 
-void copy_line(string boardline, string glyphline, int index)
+void copy_line(string &boardline, string glyphline, int index)
 {
     if(glyphline.size() > index)
     {
@@ -167,7 +167,7 @@ void copy_line(string boardline, string glyphline, int index)
     }
 }
 
-void copy_board(vector<string> board, vector<string> glyph, int index)
+void copy_board(vector<string> &board, vector<string> glyph, int index)
 {
     for(int i = 0; i < board.size(); i++)
     {
