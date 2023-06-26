@@ -154,6 +154,37 @@ int get_variation(string before, string character, string after)
     return variation;
 }
 
+void copy_line(string boardline, string glyphline, int index)
+{
+    if(glyphline.size() > index)
+    {
+        throw "Error while rendering. glyph size too big";
+    }
+
+    for(int i = 0; i < glyphline.size(); i++)
+    {
+        boardline[index - glyphline.size() + i] = glyphline[i];
+    }
+}
+
+void copy_board(vector<string> board, vector<string> glyph, int index)
+{
+    for(int i = 0; i < board.size(); i++)
+    {
+        auto line = glyph[i];
+        copy_line(board[i], line, index);
+    }
+}
+
+void print_board(vector<string> board)
+{
+    for (int i = 0; i < board.size(); i++)
+    {
+        string line = board[i];
+        cout << line << endl;
+    }
+}
+
 int main(int argc, char** argv)
 {
 
@@ -183,11 +214,13 @@ int main(int argc, char** argv)
     int screen_height = header.glyph_height;
     int screen_width = 80;
 
-    vector<string> banner;
-    string whitespace_line(" ", screen_width);
+    vector<string> board;
+    // string whitespace_line(" ", screen_width);
+    string whitespace_line;
+    whitespace_line.resize(screen_width, ' ');
     for(int i = 0; i < screen_height; i++)
     {
-        banner.push_back(whitespace_line);
+        board.push_back(whitespace_line);
     }
 
 
@@ -196,12 +229,13 @@ int main(int argc, char** argv)
     cout << glyph_map[key] << endl;
     vector<string> lines = glyphs[glyph_map[key] ].lines;
 
-    int pointer = screen_width;
     
     // define persian joining and non-joining symbols
 
 
     // start rendering
+
+    int index = screen_width;
 
     for(int i = 1; i < chars.size() - 1; i++)
     {
@@ -209,13 +243,14 @@ int main(int argc, char** argv)
         string character = chars[i];
         string after = chars[i+1];
         int variation = get_variation(before, character, after);
-        cout << chars[i] << " " << variation << endl;
+        // cout << chars[i] << " " << variation << endl;
         glyph current_glyph = glyphs[glyph_map[make_pair(character, variation)]];
-        for (auto &line:current_glyph.lines)
-        {
-            cout << line << endl;
-        }
+        
+        copy_board(board, current_glyph.lines, index);
+        index -= current_glyph.width;
     }
+
+    print_board(board);
 
     return 0;
 }
