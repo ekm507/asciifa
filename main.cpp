@@ -24,8 +24,46 @@ struct glyph
     int direction;
     int variation;
     int width;
-    vector<string> lines;
+    vector<vector<string> > lines;
 };
+
+
+pair<string, int> itterate_over_string(string str, int index)
+{
+    unsigned char lb;
+    lb = str[index];
+
+    int code_length;
+    if (( lb & 0x80 ) == 0 )          // lead bit is zero, must be a single ascii
+        code_length = 1;
+    else if (( lb & 0xE0 ) == 0xC0 )  // 110x xxxx
+        code_length = 2;
+    else if (( lb & 0xF0 ) == 0xE0 ) // 1110 xxxx
+        code_length = 3;
+    else if (( lb & 0xF8 ) == 0xF0 ) // 1111 0xxx
+        code_length = 4;
+
+    string symbol = str.substr(index, code_length);
+
+    return make_pair(symbol, code_length);
+}
+
+vector<string> string_into_vector(string text)
+{
+    int i = 0;
+    int index = 0;
+    vector<string> chars;
+    // for(i = 0; i < ; i++)
+    while(index < text.size())
+    {
+        pair<string, int> str_parts = itterate_over_string(text, index);
+        string symbol = str_parts.first;
+        index += str_parts.second;
+        chars.push_back(symbol);
+    }
+    return chars;
+}
+
 
 pair< font_header, vector<glyph> > read_font(ifstream& fontfile)
 {
@@ -80,7 +118,7 @@ pair< font_header, vector<glyph> > read_font(ifstream& fontfile)
         for (int j = 0; j < header.glyph_height; j++)
         {
             getline (fontfile, fontfile_line);
-            current_glyph.lines.push_back(fontfile_line);
+            current_glyph.lines.push_back(string_into_vector(fontfile_line));
         }
         
         current_glyph.width = current_glyph.lines[header.korsi].size();
@@ -92,41 +130,6 @@ pair< font_header, vector<glyph> > read_font(ifstream& fontfile)
     return make_pair(header, glyphs);
 }
 
-pair<string, int> itterate_over_string(string str, int index)
-{
-    unsigned char lb;
-    lb = str[index];
-
-    int code_length;
-    if (( lb & 0x80 ) == 0 )          // lead bit is zero, must be a single ascii
-        code_length = 1;
-    else if (( lb & 0xE0 ) == 0xC0 )  // 110x xxxx
-        code_length = 2;
-    else if (( lb & 0xF0 ) == 0xE0 ) // 1110 xxxx
-        code_length = 3;
-    else if (( lb & 0xF8 ) == 0xF0 ) // 1111 0xxx
-        code_length = 4;
-
-    string symbol = str.substr(index, code_length);
-
-    return make_pair(symbol, code_length);
-}
-
-vector<string> string_into_vector(string text)
-{
-    int i = 0;
-    int index = 0;
-    vector<string> chars;
-    // for(i = 0; i < ; i++)
-    while(index < text.size())
-    {
-        pair<string, int> str_parts = itterate_over_string(text, index);
-        string symbol = str_parts.first;
-        index += str_parts.second;
-        chars.push_back(symbol);
-    }
-    return chars;
-}
 
 int get_variation(string before, string character, string after)
 {
