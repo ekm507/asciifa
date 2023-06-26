@@ -134,6 +134,8 @@ pair< font_header, vector<glyph> > read_font(ifstream& fontfile)
 int get_variation(string before, string character, string after)
 {
 
+    // define persian joining and non-joining symbols
+
     // characters which need character to be separated if it is after them
     string after_n = "()«»رذزدژآاءٔوؤ!؟?\n. ‌،:؛";
     //  characters which need character to be separated if it is before them
@@ -228,24 +230,18 @@ map<pair<string, int>, int> make_glyph_map(vector<glyph> glyphs)
 vector<vector<string> > render(string text, vector<glyph> glyphs, font_header header, int screen_width)
 {
 
-    auto glyph_map = make_glyph_map(glyphs);
 
     // get string and convert it into vector
-
     text = " " + text + " ";
     vector<string> chars = string_into_vector(text);
-
     
-    // make screen banner
+    // make screen board
 
     int screen_height = header.glyph_height;
-
     auto board = make_empty_board(screen_width, screen_height);
 
-
-    
-    // define persian joining and non-joining symbols
-
+    // generate glyph map
+    auto glyph_map = make_glyph_map(glyphs);
 
     // start rendering
 
