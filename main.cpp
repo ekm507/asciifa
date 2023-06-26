@@ -114,8 +114,11 @@ int main(int argc, char** argv)
     int screen_width = 80;
 
     vector<string> banner;
-    string line(" ", screen_width);
-
+    string whitespace_line(" ", screen_width);
+    for(int i = 0; i < screen_height; i++)
+    {
+        banner.push_back(whitespace_line);
+    }
 
 
     pair<string, int> key = {"م", 4};
