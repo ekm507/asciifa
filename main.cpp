@@ -59,21 +59,27 @@ int main(int argc, char** argv)
 
     vector <glyph> glyphs;
 
-    cout << header.number_of_glyphs << endl;
-
     for(int i = 0; i < header.number_of_glyphs; i++)
     {
-        cout << i << endl;
 
         glyph current_glyph;
+        // cout << endl;
+
         getline (fontfile, fontfile_line);
+        // fontfile >> fontfile_line;
         current_glyph.character = fontfile_line;
+        // cout << "«" << fontfile_line << "»" << endl;
+
         getline (fontfile, fontfile_line, ' ');
+        // cout << "«" << fontfile_line << "»" << endl;
+        // cout << fontfile_line << endl;
         current_glyph.variation = stoi(fontfile_line);
+        // cout  << current_glyph.variation << endl;
+
         getline (fontfile, fontfile_line, ' ');
+        // cout << fontfile_line << endl;
         current_glyph.direction = stoi(fontfile_line);
 
-        cout << current_glyph.character << current_glyph.variation << current_glyph.direction << endl;
         
         for (int j = 0; j < header.glyph_height; j++)
         {
@@ -83,10 +89,13 @@ int main(int argc, char** argv)
         
         glyphs.push_back(current_glyph);
 
-        for (int j = 0; j < header.glyph_height; j++)
-        {
-            cout << glyphs[i].lines[j] << endl;
-        }
+        // cout << "«" << glyphs[i].character << "»" << endl;
+        // cout << current_glyph.character << current_glyph.variation << current_glyph.direction << endl;
+        // for (int j = 0; j < header.glyph_height; j++)
+        // {
+        //     // cout << glyphs[i].lines[j] << endl;
+        //     // j+=1;
+        // }
 
     }
 
