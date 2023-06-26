@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include <utility>
+#include <map>
 
 using namespace std;
 
@@ -98,6 +99,27 @@ int main(int argc, char** argv)
 
     auto [header, glyphs] = read_font(fontfile);
 
+    map<pair<string, int>, int> glyph_map;
+
+    for(int i = 0; i < glyphs.size(); i++)
+    {
+        pair<string, int> key = {glyphs[i].character, glyphs[i].variation};
+        glyph_map[key] = i;
+
+    }
+
+    pair<string, int> key = {"م", 4};
+
+    cout << glyph_map[key] << endl;
+    vector<string> lines = glyphs[glyph_map[key] ].lines;
+    for(auto &i:lines)
+    {
+        cout << i << endl;
+    }
+
+
+    string text = "سلام";
+    cout << text << endl;
 
     return 0;
 }
