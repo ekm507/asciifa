@@ -151,11 +151,6 @@ int main(int argc, char** argv)
     text = " " + text + " ";
     vector<string> chars = string_into_vector(text);
 
-    for(auto &i:chars)
-    {
-        cout << i << endl;
-    }
-
     
     // make screen banner
 
@@ -177,6 +172,12 @@ int main(int argc, char** argv)
 
     int pointer = screen_width;
     
+    // start rendering
+
+    for(int i = 1; i < chars.size() - 1; i++)
+    {
+        cout << chars[i] << endl;
+    }
 
     return 0;
 }
