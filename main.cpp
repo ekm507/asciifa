@@ -31,6 +31,10 @@ int main(int argc, char** argv)
     getline (fontfile, header_part, ' ');
     header.glyph_height = stoi(header_part);
 
+    getline (fontfile, header_part, ' ');
+    header.korsi = stoi(header_part);
+
+
     cout << header.filetype << endl;
     cout << header.glyph_height << endl;
 
