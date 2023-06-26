@@ -18,3 +18,10 @@
 ```bash
 $ g++ -std=c++23 main.cpp && ./a.out
 ```
+
+با این دستور اجرا کنید و خروجی بگیرید:
+```bash
+$ ./a.out "نوشته"
+```
+
+![image](https://github.com/ekm507/asciifa/assets/13185969/9843f189-f6dc-4f8f-ac11-dc1b0eace818)
