@@ -110,6 +110,13 @@ int main(int argc, char** argv)
         glyph_map[key] = i;
     }
 
+    int screen_height = header.glyph_height;
+    int screen_width = 80;
+
+    vector<string> banner;
+    string line(" ", screen_width);
+
+
 
     pair<string, int> key = {"م", 4};
 
