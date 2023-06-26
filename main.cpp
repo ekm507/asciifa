@@ -43,6 +43,9 @@ int main(int argc, char** argv)
     getline (fontfile, header_part, ' ');
     header.number_of_glyphs = stoi(header_part);
 
+    getline (fontfile, header_part, ' ');
+    header.default_direction = stoi(header_part);
+
 
     cout << header.filetype << endl;
     cout << header.glyph_height << endl;
