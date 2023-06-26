@@ -23,6 +23,7 @@ struct glyph
     string character;
     int direction;
     int variation;
+    int width;
     vector<string> lines;
 };
 
@@ -74,6 +75,7 @@ pair< font_header, vector<glyph> > read_font(ifstream& fontfile)
         getline (fontfile, fontfile_line, ' ');
         current_glyph.direction = stoi(fontfile_line);
 
+
         
         for (int j = 0; j < header.glyph_height; j++)
         {
@@ -81,6 +83,7 @@ pair< font_header, vector<glyph> > read_font(ifstream& fontfile)
             current_glyph.lines.push_back(fontfile_line);
         }
         
+        current_glyph.width = current_glyph.lines[header.korsi].size();
         glyphs.push_back(current_glyph);
 
 
@@ -105,8 +108,8 @@ int main(int argc, char** argv)
     {
         pair<string, int> key = {glyphs[i].character, glyphs[i].variation};
         glyph_map[key] = i;
-
     }
+
 
     pair<string, int> key = {"م", 4};
 
