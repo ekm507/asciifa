@@ -28,7 +28,11 @@ int main(int argc, char** argv)
     getline (fontfile, header_part, ' ');
     header.filetype = header_part;
 
+    getline (fontfile, header_part, ' ');
+    header.glyph_height = stoi(header_part);
+
     cout << header.filetype << endl;
+    cout << header.glyph_height << endl;
 
     // while (getline (fontfile, fontfile_line)) {
     // // Output the text from the file
