@@ -92,6 +92,26 @@ pair< font_header, vector<glyph> > read_font(ifstream& fontfile)
     return make_pair(header, glyphs);
 }
 
+pair<string, int> itterate_over_string(string str, int index)
+{
+    unsigned char lb;
+    lb = str[index];
+
+    int code_length;
+    if (( lb & 0x80 ) == 0 )          // lead bit is zero, must be a single ascii
+        code_length = 1;
+    else if (( lb & 0xE0 ) == 0xC0 )  // 110x xxxx
+        code_length = 2;
+    else if (( lb & 0xF0 ) == 0xE0 ) // 1110 xxxx
+        code_length = 3;
+    else if (( lb & 0xF8 ) == 0xF0 ) // 1111 0xxx
+        code_length = 4;
+
+    string symbol = str.substr(index, index + code_length);
+
+    return make_pair(str, index + code_length);
+}
+
 int main(int argc, char** argv)
 {
     string font_filename = "./fonts/aipara.aff";
@@ -125,11 +145,9 @@ int main(int argc, char** argv)
 
     cout << glyph_map[key] << endl;
     vector<string> lines = glyphs[glyph_map[key] ].lines;
-    for(auto &i:lines)
-    {
-        cout << i << endl;
-    }
 
+    int pointer = screen_width;
+    
 
     string text = "سلام";
     cout << text << endl;
