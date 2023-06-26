@@ -172,6 +172,16 @@ int main(int argc, char** argv)
 
     int pointer = screen_width;
     
+    // define persian joining and non-joining symbols
+
+    // characters which need character to be separated if it is after them
+    string after_n = "()«»رذزدژآاءٔوؤ!؟?\n. ‌،:؛";
+    //  characters which need character to be separated if it is before them
+    string before_n = "()«» ‌،؛:ٔ.؟!?\n";
+    // list of characters in persian alphabet
+    string fa = "ضصثقفغعهخحجچشسیبلاتنمکگظطزآرذدپوؤءژ‍";
+
+
     // start rendering
 
     for(int i = 1; i < chars.size() - 1; i++)
