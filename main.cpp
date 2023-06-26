@@ -130,11 +130,10 @@ vector<string> string_into_vector(string text)
 
 int main(int argc, char** argv)
 {
+
+    // read font
     string font_filename = "./fonts/aipara.aff";
     ifstream fontfile(font_filename);
-
-    // font_header header;
-    // vector<glyph> glyphs;
 
     auto [header, glyphs] = read_font(fontfile);
 
@@ -145,6 +144,20 @@ int main(int argc, char** argv)
         pair<string, int> key = {glyphs[i].character, glyphs[i].variation};
         glyph_map[key] = i;
     }
+
+    // get string and convert it into vector
+
+    string text = "سلام";
+    text = " " + text + " ";
+    vector<string> chars = string_into_vector(text);
+
+    for(auto &i:chars)
+    {
+        cout << i << endl;
+    }
+
+    
+    // make screen banner
 
     int screen_height = header.glyph_height;
     int screen_width = 80;
@@ -163,17 +176,6 @@ int main(int argc, char** argv)
     vector<string> lines = glyphs[glyph_map[key] ].lines;
 
     int pointer = screen_width;
-    
-
-    string text = "سلام";
-    text = " " + text + " ";
-    vector<string> chars = string_into_vector(text);
-
-    for(auto &i:chars)
-    {
-        cout << i << endl;
-    }
-
     
 
     return 0;
