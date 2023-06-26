@@ -81,9 +81,11 @@ int main(int argc, char** argv)
             current_glyph.lines.push_back(fontfile_line);
         }
         
+        glyphs.push_back(current_glyph);
+
         for (int j = 0; j < header.glyph_height; j++)
         {
-            cout << current_glyph.lines[j] << endl;
+            cout << glyphs[i].lines[j] << endl;
         }
 
     }
