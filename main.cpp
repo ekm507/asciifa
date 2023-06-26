@@ -205,7 +205,16 @@ int main(int argc, char** argv)
 
     for(int i = 1; i < chars.size() - 1; i++)
     {
-        cout << chars[i] << endl;
+        string before = chars[i-1];
+        string character = chars[i];
+        string after = chars[i+1];
+        int variation = get_variation(before, character, after);
+        cout << chars[i] << " " << variation << endl;
+        glyph current_glyph = glyphs[glyph_map[make_pair(character, variation)]];
+        for (auto &line:current_glyph.lines)
+        {
+            cout << line << endl;
+        }
     }
 
     return 0;
