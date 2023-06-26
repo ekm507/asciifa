@@ -274,7 +274,13 @@ int main(int argc, char** argv)
 
     // get string and convert it into vector
 
-    string text = "سلام";
+    string text;
+
+    if(argc > 1)
+        text = argv[1];
+    else
+        text = "سلام";
+
     int screen_width = 80;
 
     auto [header, glyphs] = read_font(fontfile);
