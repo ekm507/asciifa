@@ -154,7 +154,7 @@ int main(int argc, char** argv)
     int i = 0;
     int index = 0;
     // for(i = 0; i < ; i++)
-    while(i < text.size())
+    while(index < text.size())
     {
         pair<string, int> str_parts = itterate_over_string(text, index);
         string symbol = str_parts.first;
