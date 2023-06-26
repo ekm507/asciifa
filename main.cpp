@@ -192,6 +192,25 @@ void print_board(vector<vector<string> > board)
     }
 }
 
+vector<vector<string> > make_empty_board(int screen_width, int screen_height)
+{
+
+    vector<vector<string> > board;
+    string whitespace = " ";
+    vector<string> whitespace_line;
+    for(int i = 0; i < screen_width; i++)
+    {
+        whitespace_line.push_back(whitespace);
+    }
+
+    for(int i = 0; i < screen_height; i++)
+    {
+        board.push_back(whitespace_line);
+    }
+
+    return board;
+}
+
 vector<vector<string> > render(string text, vector<glyph> glyphs, font_header header, int screen_width)
 {
 
@@ -213,19 +232,7 @@ vector<vector<string> > render(string text, vector<glyph> glyphs, font_header he
 
     int screen_height = header.glyph_height;
 
-    vector<vector<string> > board;
-    string whitespace = " ";
-    vector<string> whitespace_line;
-    for(int i = 0; i < screen_width; i++)
-    {
-        whitespace_line.push_back(whitespace);
-    }
-
-    for(int i = 0; i < screen_height; i++)
-    {
-        board.push_back(whitespace_line);
-    }
-
+    auto board = make_empty_board(screen_width, screen_height);
 
 
     
