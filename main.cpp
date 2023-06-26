@@ -157,7 +157,7 @@ int get_variation(string before, string character, string after)
     return variation;
 }
 
-void copy_line(string &boardline, string glyphline, int index, int glyph_width)
+void copy_line(vector<string> &boardline, vector<string> glyphline, int index, int glyph_width)
 {
     if(glyphline.size() > index)
     {
@@ -170,13 +170,13 @@ void copy_line(string &boardline, string glyphline, int index, int glyph_width)
     }
 }
 
-void copy_board(vector<string> &board, vector<string> glyph, int index, int glyph_width)
+void copy_board(vector<vector<string> > &board, vector<vector<string> > glyph, int index, int glyph_width)
 {
     for(int i = 0; i < board.size(); i++)
     {
         auto line = glyph[i];
         copy_line(board[i], line, index, glyph_width);
-        cout << line << endl;
+        // cout << line << endl;
     }
 }
 
