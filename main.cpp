@@ -180,13 +180,22 @@ void copy_board(vector<vector<string> > &board, vector<vector<string> > glyph, i
     }
 }
 
-void print_board(vector<string> board)
+void print_board(vector<vector<string> > board)
 {
-    for (int i = 0; i < board.size(); i++)
+    for (auto &line: board)
     {
-        string line = board[i];
-        cout << line << endl;
+        for (auto &symbol:line)
+        {
+            cout << symbol;
+        }
+        cout << endl;
     }
+    // for (int i = 0; i < board.size(); i++)
+    // {
+    //     auto line = board[i];
+        
+    //     cout << line << endl;
+    // }
 }
 
 int main(int argc, char** argv)
