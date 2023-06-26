@@ -190,12 +190,6 @@ void print_board(vector<vector<string> > board)
         }
         cout << endl;
     }
-    // for (int i = 0; i < board.size(); i++)
-    // {
-    //     auto line = board[i];
-        
-    //     cout << line << endl;
-    // }
 }
 
 int main(int argc, char** argv)
@@ -228,7 +222,6 @@ int main(int argc, char** argv)
     int screen_width = 80;
 
     vector<vector<string> > board;
-    // string whitespace_line(" ", screen_width);
     string whitespace = " ";
     vector<string> whitespace_line;
     for(int i = 0; i < screen_width; i++)
