@@ -107,9 +107,9 @@ pair<string, int> itterate_over_string(string str, int index)
     else if (( lb & 0xF8 ) == 0xF0 ) // 1111 0xxx
         code_length = 4;
 
-    string symbol = str.substr(index, index + code_length);
+    string symbol = str.substr(index, code_length);
 
-    return make_pair(str, index + code_length);
+    return make_pair(symbol, code_length);
 }
 
 int main(int argc, char** argv)
@@ -149,7 +149,19 @@ int main(int argc, char** argv)
     int pointer = screen_width;
     
 
-    string text = "سلام";
+    string text = "سلام من عرفان هستم";
+
+    int i = 0;
+    int index = 0;
+    // for(i = 0; i < ; i++)
+    while(i < text.size())
+    {
+        pair<string, int> str_parts = itterate_over_string(text, index);
+        string symbol = str_parts.first;
+        index += str_parts.second;
+        // i = index;
+        cout << index << " " << symbol << endl;
+    }
     cout << text << endl;
 
     return 0;
