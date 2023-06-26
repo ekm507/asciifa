@@ -211,9 +211,8 @@ vector<vector<string> > make_empty_board(int screen_width, int screen_height)
     return board;
 }
 
-vector<vector<string> > render(string text, vector<glyph> glyphs, font_header header, int screen_width)
+map<pair<string, int>, int> make_glyph_map(vector<glyph> glyphs)
 {
-
     map<pair<string, int>, int> glyph_map;
 
     for(int i = 0; i < glyphs.size(); i++)
@@ -221,6 +220,15 @@ vector<vector<string> > render(string text, vector<glyph> glyphs, font_header he
         pair<string, int> key = {glyphs[i].character, glyphs[i].variation};
         glyph_map[key] = i;
     }
+
+    return glyph_map;
+
+}
+
+vector<vector<string> > render(string text, vector<glyph> glyphs, font_header header, int screen_width)
+{
+
+    auto glyph_map = make_glyph_map(glyphs);
 
     // get string and convert it into vector
 
