@@ -112,6 +112,22 @@ pair<string, int> itterate_over_string(string str, int index)
     return make_pair(symbol, code_length);
 }
 
+vector<string> string_into_vector(string text)
+{
+    int i = 0;
+    int index = 0;
+    vector<string> chars;
+    // for(i = 0; i < ; i++)
+    while(index < text.size())
+    {
+        pair<string, int> str_parts = itterate_over_string(text, index);
+        string symbol = str_parts.first;
+        index += str_parts.second;
+        chars.push_back(symbol);
+    }
+    return chars;
+}
+
 int main(int argc, char** argv)
 {
     string font_filename = "./fonts/aipara.aff";
@@ -149,20 +165,11 @@ int main(int argc, char** argv)
     int pointer = screen_width;
     
 
-    string text = "سلام من عرفان هستم";
-
-    int i = 0;
-    int index = 0;
-    // for(i = 0; i < ; i++)
-    while(index < text.size())
+    string text = "سلام";
+    vector<string> chars = string_into_vector(text);
+    for(auto &i:chars)
     {
-        pair<string, int> str_parts = itterate_over_string(text, index);
-        string symbol = str_parts.first;
-        index += str_parts.second;
-        // i = index;
-        cout << index << " " << symbol << endl;
+        cout << i << endl;
     }
-    cout << text << endl;
-
     return 0;
 }
