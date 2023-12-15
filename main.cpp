@@ -110,7 +110,7 @@ pair< font_header, vector<glyph> > read_font(ifstream& fontfile)
         getline (fontfile, fontfile_line, ' ');
         current_glyph.variation = stoi(fontfile_line);
 
-        getline (fontfile, fontfile_line, ' ');
+        getline (fontfile, fontfile_line);
         current_glyph.direction = stoi(fontfile_line);
 
 
