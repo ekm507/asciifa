@@ -254,6 +254,7 @@ vector<vector<string> > render(string text, vector<glyph> glyphs, font_header he
         string after = chars[i+1];
         int variation = get_variation(before, character, after);
         // cout << chars[i] << " " << variation << endl;
+        // TODO: get a default value when a glyph does not exist. it can be either empty, question mark or spaces.
         glyph current_glyph = glyphs[glyph_map[make_pair(character, variation)]];
         
         copy_board(board, current_glyph.lines, index, current_glyph.width);
